@@ -47,8 +47,19 @@ for row in oracur.fetchall():
         oraColumnNames[0]: row[0], 
         oraColumnNames[1]: row[1], 
         oraColumnNames[2]: row[2], 
-        oraColumnNames[3]: row[3]
-    })
+        oraColumnNames[3]: row[3],
+        oraColumnNames[4]: row[4],
+        oraColumnNames[5]: row[5],
+        oraColumnNames[6]: row[6],
+        oraColumnNames[7]: row[7],
+        oraColumnNames[8]: row[8],
+        oraColumnNames[9]: row[9],
+        oraColumnNames[10]: row[10], 
+        oraColumnNames[11]: row[11], 
+        oraColumnNames[12]: row[12], 
+        oraColumnNames[13]: row[13],
+        oraColumnNames[14]: row[14]
+    })    })
 
 oraConn.close()         
 print("**Bye-oracle")
