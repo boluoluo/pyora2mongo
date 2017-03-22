@@ -1,0 +1,58 @@
+print("**Hello-oracle")
+
+import cx_Oracle
+oraConn = cx_Oracle.connect('[login]/[pwd]@[host]')
+oracur = oraConn.cursor()        
+oraTableName = '[table_name]'
+
+oracur.execute('select count(*) from dba_tab_columns where table_name = \''+oraTableName+'\' order by COLUMN_ID')
+results = oracur.fetchone()
+print(results[0])
+
+oracur.execute('select owner, table_name, column_name, data_type from dba_tab_columns where table_name = \''+oraTableName+'\' order by COLUMN_ID')
+
+oraColumnNames = []
+for row in oracur.fetchall():
+    oraColumnNames.append(row[2])
+
+sql = 'select '    
+for col in oraColumnNames:
+    sql += ' ' + col + ',' 
+    print(sql)    
+
+sql = sql[:-1] + ' from ' + oraTableName
+print(sql)
+
+oracur.execute('select count(*) from '+oraTableName)
+results = oracur.fetchone()
+print(results[0])
+
+
+oracur.execute(sql)
+
+#oraConn.close()         
+#print("**Bye-oracle")
+
+print("**Hello-mongo")
+import pymongo
+from pymongo import MongoClient
+
+mongoConn = pymongo.MongoClient('mongodb://[host]:[port]')
+db = mongoConn.'[mymongo_dbname]'
+
+print("**DW-mongo here**")
+
+for row in oracur.fetchall():
+    db.'[mymongo_collname]'.insert_one({
+        oraColumnNames[0]: row[0], 
+        oraColumnNames[1]: row[1], 
+        oraColumnNames[2]: row[2], 
+        oraColumnNames[3]: row[3]
+    })
+
+oraConn.close()         
+print("**Bye-oracle")
+
+
+mongoConn.close()
+print("**Bye-mongo")
